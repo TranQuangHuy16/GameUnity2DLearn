@@ -9,9 +9,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Transform groundCheck; // Transform to check if the player is grounded
     private bool isGrounded; // Flag to check if the player is on the ground
     private Rigidbody2D rb;
-
+    private Animator animator;
     private void Awake()
     {
+        animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
     }
 
@@ -26,6 +27,7 @@ public class PlayerController : MonoBehaviour
     {
         HandleMovement();
         HandleJump();
+        UpdateAnimation();
     }
 
     private void HandleMovement()
@@ -52,4 +54,11 @@ public class PlayerController : MonoBehaviour
 
     }
 
+    private void UpdateAnimation()
+    {
+        bool isRunning = Mathf.Abs(rb.linearVelocity.x) > 0.1f;
+        bool isJumping = !isGrounded;
+        animator.SetBool("isRunning", isRunning);
+        animator.SetBool("isJumping", isJumping);
+    }
 }
