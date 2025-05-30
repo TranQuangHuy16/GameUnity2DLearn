@@ -10,8 +10,10 @@ public class PlayerController : MonoBehaviour
     private bool isGrounded; // Flag to check if the player is on the ground
     private Rigidbody2D rb;
     private Animator animator;
+    private GameManager gameManager;
     private void Awake()
     {
+        gameManager = FindObjectOfType<GameManager>();
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
     }
@@ -25,6 +27,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (gameManager.IsGameOver() || gameManager.IsGameWin()) return;
         HandleMovement();
         HandleJump();
         UpdateAnimation();
