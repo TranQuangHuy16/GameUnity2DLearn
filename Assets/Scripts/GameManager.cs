@@ -56,7 +56,7 @@ public class GameManager : MonoBehaviour
     {
         isGameOver = true;
         score = 0;
-        gameWinUI.SetActive(true);
+        gameOverUI.SetActive(true);
     }
 
     public void RestartGame()
